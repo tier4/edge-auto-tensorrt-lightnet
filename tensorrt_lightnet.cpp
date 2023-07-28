@@ -2,15 +2,15 @@
 
 namespace tensorrt_lightnet
 {
-    TrtLightNet::TrtLightNet()
+    TrtLightNet::TrtLightNet(const std::string &model_cfg, const std::string &model_weights)
     {
         // Initialize a detector
         ::Config config;
 
         // TODO: パスを引数として渡す
         config.net_type = YOLOV4;
-        config.file_model_cfg = "/home/tishizuka/Workspace/edge-auto-jetson/src/tensorrt_lightnet/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg";
-        config.file_model_weights = "/home/tishizuka/Workspace/edge-auto-jetson/src/tensorrt_lightnet/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights";
+        config.file_model_cfg = model_cfg;
+        config.file_model_weights = model_weights;
         config.inference_precison = FP32;
         config.batch = 1;
         config.width = 1280;

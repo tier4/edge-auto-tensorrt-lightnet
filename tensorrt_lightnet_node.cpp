@@ -8,7 +8,18 @@ namespace tensorrt_lightnet
         using std::placeholders::_1;
         using std::chrono_literals::operator""ms;
 
-        trt_lightnet_ = std::make_unique<tensorrt_lightnet::TrtLightNet>();
+        auto declare_parameter_with_description =
+            [this](std::string name, auto default_val, std::string description = "")
+        {
+            auto param_desc = rcl_interfaces::msg::ParameterDescriptor{};
+            param_desc.description = description;
+            return this->declare_parameter(name, default_val, param_desc);
+        };
+
+        std::string model_cfg = declare_parameter_with_description("model_cfg", "", "The path for .cfg file");
+        std::string model_weights = declare_parameter_with_description("model_weights", "", "The path for .weights file");
+
+        trt_lightnet_ = std::make_unique<tensorrt_lightnet::TrtLightNet>(model_cfg, model_weights);
 
         timer_ = rclcpp::create_timer(this, get_clock(), 100ms, std::bind(&TrtLightNetNode::onConnect, this));
 

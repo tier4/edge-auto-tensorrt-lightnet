@@ -12,7 +12,7 @@ namespace tensorrt_lightnet
     class TrtLightNet
     {
     public:
-        TrtLightNet();
+        TrtLightNet(const std::string &model_cfg, const std::string &model_weights);
 
         bool doInference(const std::vector<cv::Mat> &images);
 
