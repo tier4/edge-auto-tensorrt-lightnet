@@ -44,7 +44,6 @@ install(
     detector
     ${PROJECT_NAME}
     ${PROJECT_NAME}_node
-    ${PROJECT_NAME}_node_exe
   LIBRARY DESTINATION lib
 )
 
