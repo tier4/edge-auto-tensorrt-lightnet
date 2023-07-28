@@ -13,8 +13,8 @@
       <composable_node pkg="tensorrt_lightnet" plugin="tensorrt_lightnet::TrtLightNetNode" name="tensorrt_lightnet">
         <remap from="~/in/image" to="$(var input/image)" />
         <remap from="~/out/image" to="$(var output/objects)/debug/image" />
-        <param name="model_cfg" value="$(model_cfg)" />
-        <param name="model_weights" value="$(model_weights)" />
+        <param name="model_cfg" value="$(var model_cfg)" />
+        <param name="model_weights" value="$(var model_weights)" />
       </composable_node>
     </load_composable_node>
   </group>
