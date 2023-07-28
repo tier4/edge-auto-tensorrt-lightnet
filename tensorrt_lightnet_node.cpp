@@ -45,7 +45,7 @@ namespace tensorrt_lightnet
             RCLCPP_WARN(this->get_logger(), "Inference failed.");
             return;
         }
-        image_pub_.publish(in_image_ptr.toImageMsg());
+        image_pub_.publish(in_image_ptr->toImageMsg());
     }
 
 } // namespace tensorrt_lightnet
