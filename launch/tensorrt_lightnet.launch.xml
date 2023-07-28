@@ -1,0 +1,14 @@
+<launch>
+  <!-- image topic name to be subscribed -->
+  <arg name="input/image" default="image_raw" />
+  <!-- output topic name to be published (bbox) -->
+  <arg name="output/objects" default="/perception/object_recognition/detection/rois0" />
+
+  <group>
+    <node pkg="tensorrt_lightnet" exec="tensorrt_lightnet_node_exe" name="tensorrt_lightnet">
+      <remap from="~/in/image" to="$(var input/image)" />
+      <remap from="~/out/image" to="$(var output/objects)/debug/image" />
+    </node>
+  </group>
+
+</launch>
