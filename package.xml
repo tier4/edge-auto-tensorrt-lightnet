@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>tensorrt_lightnet</name>
+  <version>0.0.1</version>
+  <description>This package is a ros wrapper of https://github.com/daniel89710/lightNet-TRT</description>
+  <maintainer email="tatsuya.ishizuka@tier4.jp">Tatsuya Ishizuka</maintainer>
+  <license>TODO: License declaration</license>
+
+  <depend>image_transport</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>rclcpp_components</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
