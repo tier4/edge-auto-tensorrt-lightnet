@@ -22,7 +22,7 @@ namespace tensorrt_lightnet
 
     bool TrtLightNet::doInference(const std::vector<cv::Mat> &images)
     {
-        detector_->segment(images);
+        detector_->segment(images, "foo");
         return true;
     }
 
