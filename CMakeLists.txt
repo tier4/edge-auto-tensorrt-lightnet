@@ -39,10 +39,6 @@ rclcpp_components_register_nodes(${PROJECT_NAME}_node
   EXECUTABLE ${PROJECT_NAME}_node_exe
 )
 
-ament_package(INSTALL_TO_SHARE
-  launch
-)
-
 install(
   TARGETS
     detector
@@ -51,3 +47,10 @@ install(
     ${PROJECT_NAME}_node_exe
   LIBRARY DESTINATION lib
 )
+
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+ament_package()
