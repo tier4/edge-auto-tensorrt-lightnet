@@ -21,8 +21,9 @@ find_package(rclcpp_components REQUIRED)
 
 file(
   DOWNLOAD
-  https://drive.google.com/uc?export=download&id=1ttdVtlDiPun13EQCB4Nyls3Q8w5aXg1i
-  lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights
+  "https://drive.google.com/uc?export=download&id=1ttdVtlDiPun13EQCB4Nyls3Q8w5aXg1i"
+  "${CMAKE_SOURCE_DIR}/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights"
+  TIMEOUT 600
 )
 
 file(GLOB_RECURSE sources lightNet-TRT/modules/*.hpp lightNet-TRT/modules/*.cpp lightNet-TRT/modules/*.h lightNet-TRT/modules/*.cu lightNet-TRT/extra/*.h lightNet-TRT/module/preprocess.cu)
