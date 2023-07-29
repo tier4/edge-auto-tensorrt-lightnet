@@ -48,7 +48,9 @@ install(
 )
 
 install(
-  DIRECTORY launch
+  DIRECTORY
+    lightNet-TRT/configs
+    launch
   DESTINATION share/${PROJECT_NAME}
 )
 

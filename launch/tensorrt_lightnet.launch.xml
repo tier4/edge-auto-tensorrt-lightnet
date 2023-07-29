@@ -5,8 +5,8 @@
   <arg name="output/objects" default="/perception/object_recognition/detection/rois0" />
 
   <!-- algorithm parameters -->
-  <arg name="model_cfg" default="$(dirname)/../lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg" />
-  <arg name="model_weights" default="$(dirname)/../lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights" />
+  <arg name="model_cfg" default="$(find-pkg-share tensorrt_lightnet)/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg" />
+  <arg name="model_weights" default="$(find-pkg-share tensorrt_lightnet)/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights" />
 
   <group>
     <load_composable_node target="camera0_container">
