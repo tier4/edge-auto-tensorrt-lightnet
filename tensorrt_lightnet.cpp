@@ -7,7 +7,6 @@ namespace tensorrt_lightnet
         // Initialize a detector
         ::Config config;
 
-        // TODO: パスを引数として渡す
         config.net_type = YOLOV4;
         config.file_model_cfg = model_cfg;
         config.file_model_weights = model_weights;
@@ -22,7 +21,7 @@ namespace tensorrt_lightnet
 
     bool TrtLightNet::doInference(const std::vector<cv::Mat> &images)
     {
-        detector_->segment(images, "filename");
+        detector_->segment(images, "");
         return true;
     }
 
