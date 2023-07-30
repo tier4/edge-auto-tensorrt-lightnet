@@ -1,15 +1,15 @@
 <launch>
   <!-- image topic name to be subscribed -->
   <arg name="input/image" default="image_raw" />
-  <!-- output topic name to be published (bbox) -->
+  <!-- output topic name to be published -->
   <arg name="output/objects" default="/perception/object_recognition/detection/rois0" />
-
-  <!-- algorithm parameters -->
+  <!-- path to the lightNet-TRT cfg file to be loaded -->
   <arg name="model_cfg" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg" />
+  <!-- path to the lightNet-TRT weights file to be loaded -->
   <arg name="model_weights" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.weights" />
 
   <group>
-    <load_composable_node target="camera0_container">
+    <load_composable_node target="$(var container_name)">
       <composable_node pkg="tensorrt_lightnet" plugin="tensorrt_lightnet::TrtLightNetNode" name="tensorrt_lightnet">
         <remap from="~/in/image" to="$(var input/image)" />
         <remap from="~/out/image" to="$(var output/objects)/debug/image" />
