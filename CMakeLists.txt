@@ -29,7 +29,7 @@ file(
 file(GLOB_RECURSE sources lightNet-TRT/modules/*.hpp lightNet-TRT/modules/*.cpp lightNet-TRT/modules/*.h lightNet-TRT/modules/*.cu lightNet-TRT/extra/*.h lightNet-TRT/module/preprocess.cu)
 add_library(detector SHARED ${sources})
 target_include_directories(detector PRIVATE lightNet-TRT/extra/ lightNet-TRT/modules/ ${OpenCV_INCLUDE_DIRS} ${CUDA_TOOLKIT_ROOT_DIR}/include)
-target_link_libraries(detector nvinfer nvinfer_plugin nvparsers gflags "stdc++fs")
+target_link_libraries(detector nvinfer nvinfer_plugin nvparsers gflags "stdc++fs" ${OpenCV_LIBS})
 
 add_library(${PROJECT_NAME} SHARED tensorrt_lightnet.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE lightNet-TRT/extra/ lightNet-TRT/modules/ ${OpenCV_INCLUDE_DIRS})
