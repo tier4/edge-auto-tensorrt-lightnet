@@ -4,6 +4,8 @@ namespace tensorrt_lightnet
 {
     TrtLightNet::TrtLightNet(const std::string &model_cfg, const std::string &model_weights)
     {
+        const bool cuda = get_cuda_flg();
+
         // Initialize a detector
         ::Config config;
 
@@ -21,7 +23,19 @@ namespace tensorrt_lightnet
 
     bool TrtLightNet::doInference(const std::vector<cv::Mat> &images)
     {
+        std::vector<BatchResult> batch_res;
+
+        detector_->detect(images, batch_res, cuda);
         detector_->segment(images, "");
+
+        for (int i = 0; i < images.size(); i++)
+        {
+            for (const auto &r : batch_res[i])
+            {
+                detector_->draw_BBox(images[i], r);
+            }
+        }
+
         return true;
     }
 

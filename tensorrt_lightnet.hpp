@@ -2,6 +2,7 @@
 #define TENSORRT_LIGHTNET__TENSORRT_LIGHTNET_HPP_
 
 #include "class_detector.h"
+#include "yolo_config_parser.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -17,6 +18,7 @@ namespace tensorrt_lightnet
         bool doInference(const std::vector<cv::Mat> &images);
 
         std::unique_ptr<Detector> detector_;
+        const bool cuda;
     };
 
 } // namespace tensorrt_lightnet
