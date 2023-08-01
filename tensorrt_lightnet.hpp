@@ -15,7 +15,7 @@ namespace tensorrt_lightnet
     public:
         TrtLightNet(const std::string &model_cfg, const std::string &model_weights);
 
-        bool doInference(const std::vector<cv::Mat> &images);
+        bool doInference(std::vector<cv::Mat> images);
 
         std::unique_ptr<Detector> detector_;
         const bool cuda = false;

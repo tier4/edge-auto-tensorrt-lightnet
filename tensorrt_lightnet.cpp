@@ -21,7 +21,7 @@ namespace tensorrt_lightnet
         detector_->init(config);
     }
 
-    bool TrtLightNet::doInference(const std::vector<cv::Mat> &images)
+    bool TrtLightNet::doInference(std::vector<cv::Mat> images)
     {
         std::vector<BatchResult> batch_res;
 
