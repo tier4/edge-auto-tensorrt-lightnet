@@ -18,7 +18,7 @@ namespace tensorrt_lightnet
         bool doInference(const std::vector<cv::Mat> &images);
 
         std::unique_ptr<Detector> detector_;
-        const bool cuda;
+        const bool cuda = false;
     };
 
 } // namespace tensorrt_lightnet
