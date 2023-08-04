@@ -32,11 +32,11 @@ target_include_directories(detector PRIVATE lib/extra/ lib/modules/ ${OpenCV_INC
 target_link_libraries(detector nvinfer nvinfer_plugin nvparsers gflags "stdc++fs" ${OpenCV_LIBS})
 
 add_library(${PROJECT_NAME} SHARED src/tensorrt_lightnet.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS} include/)
 target_link_libraries(${PROJECT_NAME} detector)
 
 add_library(${PROJECT_NAME}_node SHARED src/tensorrt_lightnet_node.cpp)
-target_include_directories(${PROJECT_NAME}_node PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS} ${rclcpp_INCLUDE_DIRS} ${sensor_msgs_INCLUDE_DIRS} ${rclcpp_components_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME}_node PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS} ${rclcpp_INCLUDE_DIRS} ${sensor_msgs_INCLUDE_DIRS} ${rclcpp_components_INCLUDE_DIRS} include/)
 target_link_libraries(${PROJECT_NAME}_node ${PROJECT_NAME} image_transport::image_transport cv_bridge::cv_bridge)
 
 rclcpp_components_register_nodes(${PROJECT_NAME}_node

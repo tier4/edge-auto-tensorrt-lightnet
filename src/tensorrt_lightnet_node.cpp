@@ -1,4 +1,4 @@
-#include "tensorrt_lightnet_node.hpp"
+#include "tensorrt_lightnet/tensorrt_lightnet_node.hpp"
 
 namespace tensorrt_lightnet
 {
