@@ -22,21 +22,21 @@ find_package(rclcpp_components REQUIRED)
 file(
   DOWNLOAD
   "https://drive.google.com/uc?export=download&id=1ttdVtlDiPun13EQCB4Nyls3Q8w5aXg1i"
-  "${CMAKE_SOURCE_DIR}/lightNet-TRT/configs/lightNet-BDD100K-det-semaseg-1280x960.weights"
+  "${CMAKE_SOURCE_DIR}/lib/configs/lightNet-BDD100K-det-semaseg-1280x960.weights"
   TIMEOUT 600
 )
 
-file(GLOB_RECURSE sources lightNet-TRT/modules/*.hpp lightNet-TRT/modules/*.cpp lightNet-TRT/modules/*.h lightNet-TRT/modules/*.cu lightNet-TRT/extra/*.h lightNet-TRT/module/preprocess.cu)
+file(GLOB_RECURSE sources lib/modules/*.hpp lib/modules/*.cpp lib/modules/*.h lib/modules/*.cu lib/extra/*.h lib/module/preprocess.cu)
 add_library(detector SHARED ${sources})
-target_include_directories(detector PRIVATE lightNet-TRT/extra/ lightNet-TRT/modules/ ${OpenCV_INCLUDE_DIRS} ${CUDA_TOOLKIT_ROOT_DIR}/include)
+target_include_directories(detector PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS} ${CUDA_TOOLKIT_ROOT_DIR}/include)
 target_link_libraries(detector nvinfer nvinfer_plugin nvparsers gflags "stdc++fs" ${OpenCV_LIBS})
 
-add_library(${PROJECT_NAME} SHARED tensorrt_lightnet.cpp)
-target_include_directories(${PROJECT_NAME} PRIVATE lightNet-TRT/extra/ lightNet-TRT/modules/ ${OpenCV_INCLUDE_DIRS})
+add_library(${PROJECT_NAME} SHARED src/tensorrt_lightnet.cpp)
+target_include_directories(${PROJECT_NAME} PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} detector)
 
-add_library(${PROJECT_NAME}_node SHARED tensorrt_lightnet_node.cpp)
-target_include_directories(${PROJECT_NAME}_node PRIVATE lightNet-TRT/extra/ lightNet-TRT/modules/ ${OpenCV_INCLUDE_DIRS} ${rclcpp_INCLUDE_DIRS} ${sensor_msgs_INCLUDE_DIRS} ${rclcpp_components_INCLUDE_DIRS})
+add_library(${PROJECT_NAME}_node SHARED src/tensorrt_lightnet_node.cpp)
+target_include_directories(${PROJECT_NAME}_node PRIVATE lib/extra/ lib/modules/ ${OpenCV_INCLUDE_DIRS} ${rclcpp_INCLUDE_DIRS} ${sensor_msgs_INCLUDE_DIRS} ${rclcpp_components_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}_node ${PROJECT_NAME} image_transport::image_transport cv_bridge::cv_bridge)
 
 rclcpp_components_register_nodes(${PROJECT_NAME}_node
@@ -54,7 +54,7 @@ install(
 
 install(
   DIRECTORY
-    lightNet-TRT/configs
+    lib/configs
     launch
   DESTINATION share/${PROJECT_NAME}
 )
