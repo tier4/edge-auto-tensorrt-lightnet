@@ -7,7 +7,7 @@
   <arg name="model_cfg" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg" />
   <!-- path to the lightNet-TRT weights file to be loaded -->
   <arg name="model_weights" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.weights" />
-  <!-- container naem that this ROS node to be loaded -->
+  <!-- container name that this ROS node to be loaded -->
   <arg name="container_name" default="" />
 
   <let name="empty_container_is_specified" value="$(eval 'not &quot;$(var container_name)&quot;')" />
