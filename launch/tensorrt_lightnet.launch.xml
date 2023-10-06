@@ -7,14 +7,28 @@
   <arg name="model_cfg" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.cfg" />
   <!-- path to the lightNet-TRT weights file to be loaded -->
   <arg name="model_weights" default="$(find-pkg-share tensorrt_lightnet)/configs/lightNet-BDD100K-det-semaseg-1280x960.weights" />
+  <!-- container name that this ROS node to be loaded -->
+  <arg name="container_name" default="" />
 
-  <group>
+  <let name="empty_container_is_specified" value="$(eval 'not &quot;$(var container_name)&quot;')" />
+
+  <group if="$(var empty_container_is_specified)">
+    <node pkg="tensorrt_lightnet" exec="tensorrt_lightnet_node_exe" name="tensorrt_lightnet">
+      <remap from="~/in/image" to="$(var input/image)" />
+      <remap from="~/out/image" to="$(var output/objects)/debug/image" />
+      <param name="model_cfg" value="$(var model_cfg)" />
+      <param name="model_weights" value="$(var model_weights)" />
+    </node>
+  </group>
+
+  <group unless="$(var empty_container_is_specified)">
     <load_composable_node target="$(var container_name)">
       <composable_node pkg="tensorrt_lightnet" plugin="tensorrt_lightnet::TrtLightNetNode" name="tensorrt_lightnet">
         <remap from="~/in/image" to="$(var input/image)" />
         <remap from="~/out/image" to="$(var output/objects)/debug/image" />
         <param name="model_cfg" value="$(var model_cfg)" />
         <param name="model_weights" value="$(var model_weights)" />
+        <extra_arg name="use_intra_process_comms" value="True" />
       </composable_node>
     </load_composable_node>
   </group>

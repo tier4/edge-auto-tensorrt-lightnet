@@ -17,14 +17,11 @@ namespace tensorrt_lightnet
         explicit TrtLightNetNode(const rclcpp::NodeOptions &node_options);
 
     private:
-        void onConnect();
         void onImage(const sensor_msgs::msg::Image::ConstSharedPtr msg);
 
         image_transport::Publisher image_pub_;
 
         image_transport::Subscriber image_sub_;
-
-        rclcpp::TimerBase::SharedPtr timer_;
 
         std::unique_ptr<tensorrt_lightnet::TrtLightNet> trt_lightnet_;
     };
