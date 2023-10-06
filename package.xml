@@ -7,8 +7,6 @@
   <maintainer email="tatsuya.ishizuka@tier4.jp">Tatsuya Ishizuka</maintainer>
   <license>TODO: License declaration</license>
 
-  <buildtool_depend>ament_cmake_auto</buildtool_depend>
-
   <depend>image_transport</depend>
   <depend>rclcpp</depend>
   <depend>sensor_msgs</depend>

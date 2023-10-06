@@ -21,11 +21,17 @@ namespace tensorrt_lightnet
 
         trt_lightnet_ = std::make_unique<tensorrt_lightnet::TrtLightNet>(model_cfg, model_weights);
 
+        timer_ = rclcpp::create_timer(this, get_clock(), 100ms, std::bind(&TrtLightNetNode::onConnect, this));
+
+        image_pub_ = image_transport::create_publisher(this, "~/out/image");
+    }
+
+    void TrtLightNetNode::onConnect()
+    {
+        using std::placeholders::_1;
         image_sub_ = image_transport::create_subscription(
             this, "~/in/image", std::bind(&TrtLightNetNode::onImage, this, _1), "raw",
             rmw_qos_profile_sensor_data);
-
-        image_pub_ = image_transport::create_publisher(this, "~/out/image");
     }
 
     void TrtLightNetNode::onImage(const sensor_msgs::msg::Image::ConstSharedPtr msg)
